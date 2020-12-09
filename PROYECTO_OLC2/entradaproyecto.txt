@@ -1,0 +1,3 @@
+SELECT inventory_id
+     FROM inventory
+     WHERE true AND  1<2;
