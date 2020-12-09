@@ -245,16 +245,18 @@ def p_instruccion(t):
 
 
 def p_OPLOGICA(t):
-    '''OPLOGICA : not EXP
-                 |OPLOGICA and EXP
-                 |OPLOGICA or EXP
-                 |OPLOGICA mayor EXP
-                 |OPLOGICA menor EXP
-                 |OPLOGICA mayor_igual EXP
-                 |OPLOGICA menor_igual EXP
-                 |OPLOGICA igual EXP
-                 |OPLOGICA diferente1 EXP
-                 |OPLOGICA diferente2 EXP
+    '''OPLOGICA :  not RELACIONAL
+                 |OPLOGICA and RELACIONAL
+                 |OPLOGICA or RELACIONAL'''
+
+def p_RELACIONAL(t):
+    '''RELACIONAL :RELACIONAL mayor EXP
+                 |RELACIONAL menor EXP
+                 |RELACIONAL mayor_igual EXP
+                 |RELACIONAL menor_igual EXP
+                 |RELACIONAL igual EXP
+                 |RELACIONAL diferente1 EXP
+                 |RELACIONAL diferente2 EXP
                  |EXP'''
                 
 def p_EXP(t):
