@@ -209,16 +209,6 @@ import ply.lex as lex
 lexer = lex.lex()
 
 # Asociación de operadores y precedencia
-precedence = (
-    ('left', 'CONCAT'),
-    ('left', 'MAS', 'MENOS'),
-    ('left', 'POR', 'DIVIDIDO'),
-    ('right', 'UMENOS'),
-)
-
-
-
-
 
 
 
@@ -246,13 +236,14 @@ def p_instrucciones_instruccion(t):
 
 
 def p_instruccion(t):
-    'instruccion      : OPLOGICA'
+    '''instruccion      : OPLOGICA
+                        | SELECT '''
     t[0] = t[1]
 
 
 def p_SELECT(t):
-    '''SELECT : select distinct  LEXP from LFROM WHERE
-	          |select  LEXP from LFROM WHERE
+    ''' SELECT : select distinct  LEXP from LFROM WHERE
+	          | select  LEXP from LFROM WHERE
 	'''
 
 def p_LFROM(t):
@@ -262,8 +253,8 @@ def p_LFROM(t):
 
 def p_WHERE(t):
     ''' WHERE : where EXP
-                |where EXP GROUP
-	            |GROUP'''
+                | where EXP GROUP
+	            | GROUP'''
 
 def p_GROUP(t):
     ''' GROUP : group by EXP
@@ -279,18 +270,18 @@ def p_HAVING(t):
 
 def p_OPLOGICA(t):
     '''OPLOGICA :  not RELACIONAL
-                 |OPLOGICA and RELACIONAL
-                 |OPLOGICA or RELACIONAL'''
+                 | OPLOGICA and RELACIONAL
+                 | OPLOGICA or RELACIONAL'''
 
 def p_RELACIONAL(t):
-    '''RELACIONAL :RELACIONAL mayor EXP
-                 |RELACIONAL menor EXP
-                 |RELACIONAL mayor_igual EXP
-                 |RELACIONAL menor_igual EXP
-                 |RELACIONAL igual EXP
-                 |RELACIONAL diferente1 EXP
-                 |RELACIONAL diferente2 EXP
-                 |EXP'''
+    '''RELACIONAL : RELACIONAL mayor EXP
+                 | RELACIONAL menor EXP
+                 | RELACIONAL mayor_igual EXP
+                 | RELACIONAL menor_igual EXP
+                 | RELACIONAL igual EXP
+                 | RELACIONAL diferente1 EXP
+                 | RELACIONAL diferente2 EXP
+                 | EXP'''
 
 def p_LEXP(t):
     '''LEXP : LEXP coma EXP
@@ -298,34 +289,33 @@ def p_LEXP(t):
 
 def p_EXP(t):
     '''EXP : EXP mas EXP1
-            |EXP menos EXP1
-            |EXP multiplicacion  EXP1
-            |EXP division EXP1
-            |EXP1'''
+            | EXP menos EXP1
+            | EXP multiplicacion  EXP1
+            | EXP division EXP1
+            | EXP1'''
     
 
 def p_EXP1(t):
     '''EXP1 : EXP1 modulo EXP2
-             |EXP1 elevado EXP2
-             |EXP2'''
+             | EXP1 elevado EXP2
+             | EXP2'''
 
 def p_EXP2(t):
     '''EXP2 : para EXP parac
-              |UNARIO EXP
-              |int
-              |decimal
-              |varchar
-              |char
-              |true
-              |false
-              |id
-              |id punto EXP
-              |SELECT
-              '''
+              | UNARIO EXP
+              | int
+              | decimal
+              | varchar
+              | char
+              | true
+              | false
+              | id
+              | id punto EXP
+'''
 
-def p_UNARIOS(t):
-    '''UNARIOS:= mas
-                |menos'''
+def p_UNARIO(t):
+    '''UNARIO : mas
+                | menos'''
 
 def p_error(t):
     print(t)

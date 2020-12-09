@@ -1,1 +1,259 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    add
+    alter
+    between
+    boolean
+    character
+    check
+    column
+    constraint
+    databases
+    day
+    default
+    dospuntos
+    double
+    drop
+    enum
+    exist
+    foreign
+    hour
+    if
+    ilike
+    in
+    inherits
+    insert
+    interval
+    into
+    isnull
+    key
+    like
+    llavea
+    llavec
+    minute
+    mode
+    money
+    month
+    notnull
+    null
+    owner
+    precision
+    primary
+    ptcoma
+    r_bigint
+    r_char
+    r_date
+    r_decimal
+    r_from
+    r_integer
+    r_numeric
+    r_real
+    r_smallint
+    r_time
+    r_timestamp
+    references
+    rename
+    replace
+    second
+    set
+    show
+    simboloor
+    similar
+    symetric
+    table
+    to
+    type
+    unique
+    unknown
+    update
+    values
+    varyng
+    without
+    year
+    zone
+
+Grammar
+
+Rule 0     S' -> init
+Rule 1     init -> instrucciones
+Rule 2     instrucciones -> instrucciones instruccion
+Rule 3     instrucciones -> instruccion
+Rule 4     instruccion -> OPLOGICA
+Rule 5     instruccion -> SELECT
+Rule 6     SELECT -> select distinct LEXP from LFROM WHERE
+Rule 7     SELECT -> select LEXP from LFROM WHERE
+Rule 8     LFROM -> LEXP
+Rule 9     LFROM -> para SELECT parc
+Rule 10    LFROM -> multiplicacion
+Rule 11    WHERE -> where EXP
+Rule 12    WHERE -> where EXP GROUP
+Rule 13    WHERE -> GROUP
+Rule 14    GROUP -> group by EXP
+Rule 15    GROUP -> group by EXP HAVING
+Rule 16    GROUP -> HAVING
+Rule 17    HAVING -> having EXP
+Rule 18    HAVING -> <empty>
+Rule 19    OPLOGICA -> not RELACIONAL
+Rule 20    OPLOGICA -> OPLOGICA and RELACIONAL
+Rule 21    OPLOGICA -> OPLOGICA or RELACIONAL
+Rule 22    RELACIONAL -> RELACIONAL mayor EXP
+Rule 23    RELACIONAL -> RELACIONAL menor EXP
+Rule 24    RELACIONAL -> RELACIONAL mayor_igual EXP
+Rule 25    RELACIONAL -> RELACIONAL menor_igual EXP
+Rule 26    RELACIONAL -> RELACIONAL igual EXP
+Rule 27    RELACIONAL -> RELACIONAL diferente1 EXP
+Rule 28    RELACIONAL -> RELACIONAL diferente2 EXP
+Rule 29    RELACIONAL -> EXP
+Rule 30    LEXP -> LEXP coma EXP
+Rule 31    LEXP -> EXP
+Rule 32    EXP -> EXP mas EXP1
+Rule 33    EXP -> EXP menos EXP1
+Rule 34    EXP -> EXP multiplicacion EXP1
+Rule 35    EXP -> EXP division EXP1
+Rule 36    EXP -> EXP1
+Rule 37    EXP1 -> EXP1 modulo EXP2
+Rule 38    EXP1 -> EXP1 elevado EXP2
+Rule 39    EXP1 -> EXP2
+Rule 40    EXP2 -> para EXP parac
+Rule 41    EXP2 -> UNARIO EXP
+Rule 42    EXP2 -> int
+Rule 43    EXP2 -> decimal
+Rule 44    EXP2 -> varchar
+Rule 45    EXP2 -> char
+Rule 46    EXP2 -> true
+Rule 47    EXP2 -> false
+Rule 48    EXP2 -> id
+Rule 49    EXP2 -> id punto EXP
+Rule 50    UNARIO -> mas
+Rule 51    UNARIO -> menos
+
+Terminals, with rules where they appear
+
+add                  : 
+alter                : 
+and                  : 20
+between              : 
+boolean              : 
+by                   : 14 15
+char                 : 45
+character            : 
+check                : 
+column               : 
+coma                 : 30
+constraint           : 
+databases            : 
+day                  : 
+decimal              : 43
+default              : 
+diferente1           : 27
+diferente2           : 28
+distinct             : 6
+division             : 35
+dospuntos            : 
+double               : 
+drop                 : 
+elevado              : 38
+enum                 : 
+error                : 
+exist                : 
+false                : 47
+foreign              : 
+group                : 14 15
+having               : 17
+hour                 : 
+id                   : 48 49
+if                   : 
+igual                : 26
+ilike                : 
+in                   : 
+inherits             : 
+insert               : 
+int                  : 42
+interval             : 
+into                 : 
+isnull               : 
+key                  : 
+like                 : 
+llavea               : 
+llavec               : 
+mas                  : 32 50
+mayor                : 22
+mayor_igual          : 24
+menor                : 23
+menor_igual          : 25
+menos                : 33 51
+minute               : 
+mode                 : 
+modulo               : 37
+money                : 
+month                : 
+multiplicacion       : 10 34
+not                  : 19
+notnull              : 
+null                 : 
+or                   : 21
+owner                : 
+para                 : 9 40
+parac                : 40
+parc                 : 9
+precision            : 
+primary              : 
+ptcoma               : 
+punto                : 49
+r_bigint             : 
+r_char               : 
+r_date               : 
+r_decimal            : 
+r_from               : 
+r_integer            : 
+r_numeric            : 
+r_real               : 
+r_smallint           : 
+r_time               : 
+r_timestamp          : 
+references           : 
+rename               : 
+replace              : 
+second               : 
+select               : 6 7
+set                  : 
+show                 : 
+simboloor            : 
+similar              : 
+symetric             : 
+table                : 
+to                   : 
+true                 : 46
+type                 : 
+unique               : 
+unknown              : 
+update               : 
+values               : 
+varchar              : 44
+varyng               : 
+where                : 11 12
+without              : 
+year                 : 
+zone                 : 
+
+Nonterminals, with rules where they appear
+
+EXP                  : 11 12 14 15 17 22 23 24 25 26 27 28 29 30 31 32 33 34 35 40 41 49
+EXP1                 : 32 33 34 35 36 37 38
+EXP2                 : 37 38 39
+GROUP                : 12 13
+HAVING               : 15 16
+LEXP                 : 6 7 8 30
+LFROM                : 6 7
+OPLOGICA             : 4 20 21
+RELACIONAL           : 19 20 21 22 23 24 25 26 27 28
+SELECT               : 5 9
+UNARIO               : 41
+WHERE                : 6 7
+from                 : 6 7
+init                 : 0
+instruccion          : 2 3
+instrucciones        : 1 2
+
