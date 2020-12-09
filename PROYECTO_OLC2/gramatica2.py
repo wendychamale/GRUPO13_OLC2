@@ -99,8 +99,6 @@ tokens = [
             'mayor_igual'
             'diferente1'
             'diferente2'
-            'and'
-            'or'
             'ptcoma'
             'llavea'
             'llavec'
@@ -242,10 +240,23 @@ def p_instrucciones_instruccion(t):
 
 
 def p_instruccion(t):
-    '''instruccion      : EXP'''
+    '''instruccion      : OPLOGICA'''
     t[0] = t[1]
 
 
+def p_OPLOGICA(t):
+    '''OPLOGICA : not EXP
+                 |OPLOGICA and EXP
+                 |OPLOGICA or EXP
+                 |OPLOGICA mayor EXP
+                 |OPLOGICA menor EXP
+                 |OPLOGICA mayor_igual EXP
+                 |OPLOGICA menor_igual EXP
+                 |OPLOGICA igual EXP
+                 |OPLOGICA diferente1 EXP
+                 |OPLOGICA diferente2 EXP
+                 |EXP'''
+                
 def p_EXP(t):
     '''EXP : EXP mas EXP1
             |EXP menos EXP1
@@ -271,10 +282,9 @@ def p_EXP2(t):
               |id
               |id punto EXP'''
 def p_EXP2(t):
-    '''UNARIOS:= not
-                |mas
+    '''UNARIOS:= mas
                 |menos'''
-                
+
 def p_error(t):
     print(t)
     print("Error sintáctico en '%s'" % t.value)
