@@ -1,8 +1,8 @@
-import gramatica as g
+import gramatica2 as g
 import ts as TS
 from expresiones import *
 from instrucciones import *
-
+'''
 def procesar_imprimir(instr, ts) :
     print('> ', resolver_cadena(instr.cad, ts))
 
@@ -83,6 +83,8 @@ def procesar_instrucciones(instrucciones, ts) :
         elif isinstance(instr, If) : procesar_if(instr, ts)
         elif isinstance(instr, IfElse) : procesar_if_else(instr, ts)
         else : print('Error: instrucción no válida')
+'''
+
 
 f = open("./entrada.txt", "r")
 input = f.read()
@@ -90,4 +92,4 @@ input = f.read()
 instrucciones = g.parse(input)
 ts_global = TS.TablaDeSimbolos()
 
-procesar_instrucciones(instrucciones, ts_global)
+#procesar_instrucciones(instrucciones, ts_global)

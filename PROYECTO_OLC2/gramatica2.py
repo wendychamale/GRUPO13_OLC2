@@ -81,42 +81,48 @@ reservadas = {
     'notnull':'notnull',
     'unknown':'unknown',
     'insert':'insert',
-    'into':'into'
+    'into':'into',
+    'values':'values',
+    'group':'group',
+    'by':'by',
+    'having':'having'
 }
 
 tokens = [
-            'mas'
-            'menos'
-            'elevado'
-            'multiplicacion'
-            'division'
-            'modulo'
-            'similar'
-            'menor'
-            'mayor'
-            'igual'
-            'menor_igual'
-            'mayor_igual'
-            'diferente1'
-            'diferente2'
-            'ptcoma'
-            'llavea'
-            'llavec'
-            'para'
-            'parac'
-            'dospuntos'
-            'coma'
-            'punto'
-            'int'
-            'decimal'
-            'varchar'
-            'char'
+            'mas',
+            'menos',
+            'elevado',
+            'multiplicacion',
+            'division',
+            'modulo',
+            'menor',
+            'mayor',
+            'igual',
+            'menor_igual',
+            'mayor_igual',
+            'diferente1',
+            'diferente2',
+            'ptcoma',
+            'llavea',
+            'llavec',
+            'para',
+            'parac',
+            'dospuntos',
+            'coma',
+            'punto',
+            'int',
+            'decimal',
+            'varchar',
+            'char',
+            'parc',
+            'simboloor',
             'id'
          ] + list(reservadas.values())
 
-# Tokenst_mas = r'\+'
+# Tokens
+t_mas = r'\+'
 t_menos = r'-'
-t_elevado= r'^'
+t_elevado= r'\^'
 t_multiplicacion = r'\*'
 t_division =r'/'
 t_modulo= r'%'
@@ -135,7 +141,7 @@ t_parc = r'\)'
 t_ptcoma =r';'
 t_dospuntos=r':'
 t_coma=r','
-t_punto=r'.'
+t_punto=r'\.'
 
 
 
@@ -240,8 +246,35 @@ def p_instrucciones_instruccion(t):
 
 
 def p_instruccion(t):
-    '''instruccion      : OPLOGICA'''
+    'instruccion      : OPLOGICA'
     t[0] = t[1]
+
+
+def p_SELECT(t):
+    '''SELECT : select distinct  LEXP from LFROM WHERE
+	          |select  LEXP from LFROM WHERE
+	'''
+
+def p_LFROM(t):
+    '''LFROM : LEXP
+	        |  para SELECT parc
+	        | multiplicacion'''
+
+def p_WHERE(t):
+    ''' WHERE : where EXP
+                |where EXP GROUP
+	            |GROUP'''
+
+def p_GROUP(t):
+    ''' GROUP : group by EXP
+	            | group by EXP HAVING
+	            | HAVING
+    '''
+
+
+def p_HAVING(t):
+    ''' HAVING : having EXP
+	| '''
 
 
 def p_OPLOGICA(t):
@@ -258,7 +291,11 @@ def p_RELACIONAL(t):
                  |RELACIONAL diferente1 EXP
                  |RELACIONAL diferente2 EXP
                  |EXP'''
-                
+
+def p_LEXP(t):
+    '''LEXP : LEXP coma EXP
+	| EXP '''
+
 def p_EXP(t):
     '''EXP : EXP mas EXP1
             |EXP menos EXP1
@@ -282,8 +319,11 @@ def p_EXP2(t):
               |true
               |false
               |id
-              |id punto EXP'''
-def p_EXP2(t):
+              |id punto EXP
+              |SELECT
+              '''
+
+def p_UNARIOS(t):
     '''UNARIOS:= mas
                 |menos'''
 
