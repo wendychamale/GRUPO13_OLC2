@@ -1,3 +1,4 @@
 SELECT inventory_id
      FROM inventory
-     WHERE true AND  1<2;
+     WHERE true AND  1<2
+     n
